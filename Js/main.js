@@ -73,10 +73,10 @@ if (ResultadoTMB !== null) {
 //Array para objetivos de usuario //
 const objetivos = ["bajar de peso", "mantener peso", "ganar masa muscular", "tonificar"]
 let EstablecerObjetivo = Number (prompt ("A continuacion ingrese un objetivo :1- Bajar de peso, 2- Mantener, 3-Ganar Masa Muscular, 4-Tonificar "))
-if (EstablecerObjetivo < 1 | opcionObjetivo > 4 ) {
+if (EstablecerObjetivo < 1 || EstablecerObjetivo > 4 ) {
   alert("Opción inválida. Recargá la página e intentá de nuevo.");
 } else { let objetivoelegido= objetivos[opcionObjetivo-1]}
 
 //Calculo cuantas calorias tengo que gastar segun mi objetivo//
 let CaloriasObjetivo
-if objetivoelegido=="Bajar de peso" {CaloriaObjetivo=CaloriasMantenimiento -500}
+if (objetivoelegido==="Bajar de peso") {CaloriaObjetivo=CaloriasMantenimiento -500}
