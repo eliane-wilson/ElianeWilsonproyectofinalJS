@@ -71,7 +71,7 @@ if (ResultadoTMB !== null) {
   }
 }
 //Array para objetivos de usuario //
-const (objetivos) = ["bajar de peso", "mantener peso", "ganar masa muscular", "tonificar"]
+const objetivos = ["bajar de peso", "mantener peso", "ganar masa muscular", "tonificar"]
 let EstablecerObjetivo = Number (prompt ("A continuacion ingrese un objetivo :1- Bajar de peso, 2- Mantener, 3-Ganar Masa Muscular, 4-Tonificar "))
 if (EstablecerObjetivo < 1 | opcionObjetivo > 4 ) {
   alert("Opción inválida. Recargá la página e intentá de nuevo.");
