@@ -21,10 +21,11 @@ function calculotasametabolicaB ( sexo, altura, peso, edad)  {
     }
   }
 
-  //Ingreso de datos del usuario: 
+  //Ingreso de datos del usuario: con variables de Control // 
 
 
 let peso =Number (prompt ("A continuación ingrese su peso en kilogramos, ej: 73.400 kg, 60 kg"))
+
 let altura =Number (prompt ("Ingrese su altura en centimetros, ej: 1 metro 72 cm sería  172 cm "))
 let edad =Number (prompt ("Ingrese su edad"))
 
