@@ -1,5 +1,5 @@
 //Primer paso: Calcular el Indice Metabolico Basal del usuario: 
-function calculotasametabolicaB ( sexo, altura, peso, edad)  {
+function calculotasametabolicab ( sexo, altura, peso, edad)  {
     let tmetbasal= 0
     if (sexo=="mujer"){
     tmetbasal = 447.6 + (9.2 * peso) + (3.1 * altura) - (4.3 * edad)
@@ -12,28 +12,40 @@ function calculotasametabolicaB ( sexo, altura, peso, edad)  {
   return tmetbasal
 }
 
-  //Restriccion por sexo. 
+//Restriccion por sexo. 
   let sexo = "";
   while (sexo !== "hombre" && sexo !== "mujer") {
-    sexo = prompt("A continuación ingrese su sexo: Mujer / Hombre").toLowerCase();
+    sexo = prompt("A continuación ingrese su sexo: Mujer / Hombre").toLowerCase()
     if (sexo !== "hombre" && sexo !== "mujer") {
-    alert("Opción inválida. Por favor ingrese 'hombre' o 'mujer'.");
+    alert("Opción inválida. Por favor ingrese 'hombre' o 'mujer'.")
     }
   }
 
-  //Ingreso de datos del usuario: con variables de Control // 
+  //Ingreso de datos del usuario: con estructuras de Control // 
 
 
-let peso =Number (prompt ("A continuación ingrese su peso en kilogramos, ej: 73.400 kg, 60 kg"))
+  let peso =Number (prompt ("A continuación ingrese su peso en kilogramos, ej: 73.400 kg, 60 kg"))
+  while (peso <= 0 || peso >=700) {
+    alert ("Debes ingresar un valor real, superior a 0 kg o menor a 700 para continuar")
+    peso = Number(prompt("Ingrese su peso en kilogramos"))
+  }
 
-let altura =Number (prompt ("Ingrese su altura en centimetros, ej: 1 metro 72 cm sería  172 cm "))
-let edad =Number (prompt ("Ingrese su edad"))
+  let altura =Number (prompt ("Ingrese su altura en centimetros, ej: 1 metro 72 cm sería  172 cm "))
+  while (altura<=0 || altura >=250) {
+    alert ("Debes ingresar una estatura mayor a cero para continuar.")
+    altura= Number (prompt("Ingrese su altura en centímetros"))
+  }
+  let edad =Number (prompt ("Ingrese su edad"))
+  while ( edad <=1 || edad >=150){
+    alert ("Debes ingresar una edad mayor a cero, o menor a 150 años para continuar")
+    edad= Number (prompt("Ingrese su edad"))
+  }
 
 
-let resultadotmb = calculotasametabolicab (sexo, altura,peso, edad)
+  let resultadotmb = calculotasametabolicab (sexo, altura,peso, edad)
 
 
-//ver alert , ver el prompt como variable cuantitativa - no string 
+// Se agregaron alerts y estructuras de control para las variables numericas altura , edad y peso segun correccion //
 
 //Para poder calcular las calorias segun objetivo, la formula requiere definir actividad
 
@@ -56,16 +68,18 @@ function calculoactividad (tmb, nivelactividad){
       factoractividad=1.9
       break
     default: 
-      alert ("Opcion incorrecta")
-      return null
+      alert ("Opcion incorrecta, se tomará un factor de actividad sedentario por defecto")
+      factoractividad = undefined
   }
+  factoractividad = factoractividad ?? 1.2
+  //si el usuario ingresa una opcion incorrecta se toma una actividad sedentaria por defecto //
   return factoractividad*tmb
 
 }
 if (resultadotmb !== null) {
-  let actividad = Number (prompt ("Ingresa tu nivel de actividad física:  \n 1-Sedentario \n 2- Ligero \n3-Moderado (3 a 5 veces por semana) \n 4-Intenso (6 a 7 veces por semana) \n 5- Muy Intenso (2 veces por dia"))
+  let actividad = Number (prompt ("Ingresa tu nivel de actividad física:  \n 1-Sedentario \n 2- Ligero \n3-Moderado (3 a 5 veces por semana) \n 4-Intenso (6 a 7 veces por semana) \n 5- Muy Intenso (2 veces por dia)"))
   if (actividad >= 1 && actividad <= 5){
-  let caloriasMantenimiento = CalculoActividad (resultadotmb, actividad)
+  let caloriasmantenimiento = calculoactividad (resultadotmb, actividad)
   alert("Tu Tasa Metabólica Basal es: " + resultadotmb + "  Calorias por dia")
   console.log("Tu Tasa Metabolica Basal es: " + resultadotmb + " calorías por día")
   console.log("Calorias para mantenimiento es: "+ caloriasmantenimiento + " por dia, manteniendo tu actividad")
@@ -73,11 +87,34 @@ if (resultadotmb !== null) {
 }
 //Array para objetivos de usuario //
 const objetivos = ["bajar de peso", "mantener peso", "ganar masa muscular", "tonificar"]
+let objetivoelegido //defino objetivoelegido fuera del else para que pueda funcionar porque estaba declarada dentro del else{ let objetivo...} porque lo voy a usar mas adelante
 let establecerobjetivo = Number (prompt ("A continuacion ingrese un objetivo :1- Bajar de peso, 2- Mantener, 3-Ganar Masa Muscular, 4-Tonificar "))
-if (establecerobjetivo < 1 || establecerbbjetivo > 4 ) {
+if (establecerobjetivo < 1 || establecerobjetivo > 4 ) {
   alert("Opción inválida. Recargá la página e intentá de nuevo.");
-} else { let objetivoelegido= objetivos[opcionobjetivo-1]}
+} else { 
+  objetivoelegido= objetivos[establecerobjetivo-1]
+}
 
 //Calculo cuantas calorias tengo que gastar segun mi objetivo//
-let caloriasobjetivo
-if (objetivoelegido==="Bajar de peso") {caloriaobjetivo=caloriasmantenimiento -500}
+let caloriasobjetivo =0
+
+switch (objetivoelegido.toLowerCase()) {
+  case "bajar de peso":
+    caloriasobjetivo=caloriasmantenimiento -500
+    break
+  case "mantener peso":
+    caloriasobjetivo=caloriasmantenimiento 
+    break
+  case "ganar masa muscular ":
+    caloriasobjetivo=caloriasmantenimiento + 400
+    break
+  case "tonificar":
+    caloriasobjetivo=caloriasmantenimiento -200
+    break
+  default:
+    caloriasobjetivo=caloriasmantenimiento
+}
+
+alert  ("Tu objetivo es:  " + objetivoelegido + "\n Calorias a consumir: " + caloriasobjetivo + "por dia, manteniendo la misma actividad fisica")
+console.log ("Calorias objetivo para : " + objetivoelegido + "Total a consumir: " + caloriasobjetivo)
+  
