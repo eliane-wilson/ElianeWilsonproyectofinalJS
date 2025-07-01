@@ -11,6 +11,7 @@ const edadInput = document.getElementById("edad")
 const resultadoaP = document.getElementById("resultado")
 const alertaP = document.getElementById("alerta") //Reemplazo el alert con un texto en html// 
 const btncalcular = document.getElementById("calcular")
+let resultadotmb = null
 
 
 //Primera interaccion: evento con Botones para definir sexo // 
@@ -99,8 +100,12 @@ function calculotasametabolicab ( sexo, altura, peso, edad)  {
     //}
    //}
 
+   
+
+
 
   btncalcular.onclick = () => {
+    
     const peso = Number(pesajeInput.value)
     const altura = Number(estaturaInput.value)
     const edad = Number(edadspam.textContent)
@@ -119,10 +124,11 @@ function calculotasametabolicab ( sexo, altura, peso, edad)  {
 
     const resultado=calculotasametabolicab(sexo, altura, peso, edad)
     resultadoaP.textContent = `TMB: ${resultado.toFixed(2)} kcal/día`
+    resultadotmb = calculotasametabolicab(sexo, altura, peso, edad)
   }
 
 
-  let resultadotmb=resultado
+  
 
 // Se agregaron alerts y estructuras de control para las variables numericas altura , edad y peso segun correccion //
  // ETAPA 2 // 
@@ -161,29 +167,39 @@ const selectActividad = document.getElementById("actividad")
 let caloriasmantenimiento=0 
 selectActividad.onchange=()=>{
   const actividad =Number(selectActividad.value)
-}
 
-if (resultadotmb !== null) {
-  
-  if (actividad >= 1 && actividad <= 5){
+  if (resultadotmb !== null && actividad >= 1 && actividad <= 5){
   caloriasmantenimiento = calculoactividad (resultadotmb, actividad)
-  alertaP.textContent="Tu Tasa Metabólica Basal es: " + resultadotmb + "  Calorias por dia"
-  console.log("Tu Tasa Metabolica Basal es: " + resultadotmb + " calorías por día")
-  console.log("Calorias para mantenimiento es: "+ caloriasmantenimiento + " por dia, manteniendo tu actividad")
+  alertaP.textContent=`Tu Tasa Metabólica Basal es: ${resultadotmb} kcal por día. /n Calorías para mantenimiento: ${caloriasmantenimiento} kcal por día`
+  //console.log("Tu Tasa Metabolica Basal es: " + resultadotmb + " calorías por día")
+  //console.log("Calorias para mantenimiento es: "+ caloriasmantenimiento + " por dia, manteniendo tu actividad")
   }
-}
+  }
 //Array para objetivos de usuario //
 const objetivos = ["bajar de peso", "mantener peso", "ganar masa muscular", "tonificar"]
 let objetivoinput=document.getElementById("meta")
 let objetivoelegido=""
-
+let caloriasobjetivo=0
 
 objetivoinput.onchange=()=>{
  
-  const objetivousuario= Number(objetivoelegido.value)
+  const objetivousuario= Number(objetivoinput.value)
   if (objetivousuario>0 && objetivousuario<5){
     objetivoelegido= objetivos [objetivousuario -1 ]
     alertaP.textContent= `Tu objetivo elegido es: ${objetivoelegido}`
+    caloriasobjetivo = calcularcaloriasobjetivo(caloriasmantenimiento, objetivoelegido)
+
+  
+    document.getElementById("resultado").innerHTML = 
+    `Tu objetivo es: ${objetivoelegido}<br>Calorías a consumir: ${caloriasobjetivo} por día`
+
+    caloriasobjetivo = calcularcaloriasobjetivo(caloriasmantenimiento, objetivoelegido)
+
+    document.getElementById("resultadofinal").innerHTML=  `Tu objetivo es: ${objetivoelegido}  Calorías a consumir: ${caloriasobjetivo} por día manteniendo la misma actividad fisica `
+   
+    
+    //console.log("Calorías objetivo para: " + objetivoelegido + " Total: " + caloriasobjetivo) - para control interno, no se ejecuta
+
   }else{ 
     alertaP.textContent="Ingresaste un objetivo incorrecto, coloca solo valores del 1 al 4  "
   }
@@ -192,7 +208,7 @@ objetivoinput.onchange=()=>{
 
 //Calculo cuantas calorias tengo que gastar segun mi objetivo//
 function calcularcaloriasobjetivo(caloriasMantenimiento, objetivo){
-  let caloriasobjetivo=0
+  
   switch (objetivo.toLowerCase()){
     case "bajar de peso":
       caloriasobjetivo=caloriasmantenimiento -500
@@ -213,8 +229,3 @@ function calcularcaloriasobjetivo(caloriasMantenimiento, objetivo){
   return (caloriasobjetivo)
 }
 
-let caloriasobjetivo = calcularcaloriasobjetivo(caloriasmantenimiento, objetivoelegido)
-
-document.getElementById("resultado").innerHTML = "Tu objetivo es:  " + objetivoelegido  + "<br>"+  "Calorias a consumir: " + caloriasobjetivo + "por dia, manteniendo la misma actividad fisica"
-console.log ("Calorias objetivo para : " + objetivoelegido + "Total a consumir: " + caloriasobjetivo)
-  
