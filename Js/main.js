@@ -1,4 +1,32 @@
 //Primer paso: Calcular el Indice Metabolico Basal del usuario: 
+
+//Definir varaibles para eventos - se reemplazan los prompt, alert y consolelog. //
+
+let sexo = "" 
+const btnhombre = document.getElementById("btnhombre")
+const btnmujer = document.getElementById("btnmujer")
+const estaturaInput = document.getElementById("estatura")
+const pesajeInput = document.getElementById("pesaje")
+const edadInput = document.getElementById("edad")
+const resultadoaP = document.getElementById("resultado")
+const alertaP = document.getElementById("alerta") //Reemplazo el alert con un texto en html// 
+const btncalcular = document.getElementById("calcular")
+
+
+//Primera interaccion: evento con Botones para definir sexo // 
+
+btnhombre.onclick= () =>{
+  sexo = "hombre"
+  resultadoaP.textContent = "Sexo seleccionado: Hombre"
+}
+
+btnmujer.onclick =() =>{
+  sexo = "mujer"
+  resultadoaP.textContent = "Sexo seleccionado: Mujer"
+}
+
+//Definicion de funcion de calculo // 
+
 function calculotasametabolicab ( sexo, altura, peso, edad)  {
     let tmetbasal= 0
     if (sexo=="mujer"){
@@ -6,39 +34,55 @@ function calculotasametabolicab ( sexo, altura, peso, edad)  {
     } else if (sexo=="hombre"){
     tmetbasal = 88.36 + (13.4 * peso) + (4.8 * altura) - (5.7 * edad)
     } else {
-    console.log("Seleccionaste una opcion incorrecta, Usa 'hombre' o 'mujer'.")
+    
     return null
     }
   return tmetbasal
 }
 
-//Restriccion por sexo. 
-  let sexo = "";
-  while (sexo !== "hombre" && sexo !== "mujer") {
-    sexo = prompt("A continuación ingrese su sexo: Mujer / Hombre").toLowerCase()
-    if (sexo !== "hombre" && sexo !== "mujer") {
-    alert("Opción inválida. Por favor ingrese 'hombre' o 'mujer'.")
+  //Armado del boton Edad con estructura de control: se desactiva cuando llega a cero y a 150 años //
+
+
+  let edadspam=document.getElementById("counteredad")
+  let contadoredad = 18 
+  let sumar=document.getElementById("btnedadsuma")
+  let restar= document.getElementById("btnedadresta")
+
+  sumar.onclick=()=>{
+    if (contadoredad< 151){
+      contadoredad ++
+      counteredad.innerHTML=contadoredad
+      restar.disabled=false 
+      
+    }else{
+      sumar.disabled=true
+      
+
+    }
+   
+  }
+
+  restar.onclick=()=>{
+    
+    if (contadoredad>1){
+      contadoredad --
+      counteredad.innerHTML=contadoredad
+      sumar.disabled =false
+      
+    } else {
+      restar.disabled=true 
     }
   }
 
-  //Ingreso de datos del usuario: con estructuras de Control // 
 
-
-  let peso =Number (prompt ("A continuación ingrese su peso en kilogramos, ej: 73.400 kg, 60 kg"))
-  while (peso <= 0 || peso >=700) {
-    alert ("Debes ingresar un valor real, superior a 0 kg o menor a 700 para continuar")
-    peso = Number(prompt("Ingrese su peso en kilogramos"))
-  }
-
-  let altura =Number (prompt ("Ingrese su altura en centimetros, ej: 1 metro 72 cm sería  172 cm "))
-  while (altura<=0 || altura >=250) {
-    alert ("Debes ingresar una estatura mayor a cero para continuar y menor a 250 cm-2metros y medio - .")
-    altura= Number (prompt("Ingrese su altura en centímetros"))
-  }
-  let edad =Number (prompt ("Ingrese su edad"))
-  while ( edad <=1 || edad >=150){
-    alert ("Debes ingresar una edad mayor a cero, o menor a 150 años para continuar")
-    edad= Number (prompt("Ingrese su edad"))
+ 
+  
+  btncalcular.onclick = () => {
+    const peso = Number(pesajeInput.value)
+    const altura = Number(estaturaInput.value)
+    const edad = Number(edadspam.textContent)
+    const resultado=calculotasametabolicab(sexo, altura, peso, edad)
+    resultadoaP.textContent = `TMB: ${resultado.toFixed(2)} kcal/día`
   }
 
 

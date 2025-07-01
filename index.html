@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--- integracion CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <!-- Fuentes -->
      <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,21 +14,61 @@
     <title>Calculadora de Calorias con registro </title>
 </head>
 <body>
-    <h1> "Calculadora de Calorias con registro de Comidas </h1>
-    <br>
-    <h2>¡Bienvenidos!</h2>
-    <h3> Nos encanta tenerte aqui</h3>
-    <div>
-    <p> Te explicaremos paso a paso como lograr un calculo exitoso de Calorias a consumir </p>
-    <br>
-    <p> Primer paso: Se calcula el Indice Metabolico Basal de la persona 
-        Segundo paso: Se define objetivo: Aumento, Descenso o mantener peso para calcular KCal a consumir. 
-        Tercer paso: Se registra lo consumido, segun horario (tipo), alimento, cantidad. Opcion de eliminar alim.
-        Cuarto: Se genera alerta si el usuario excedió las cantidades diarias objetivo. 
-    </p>
+    <div class ="overlay"> </div>
+    <div class ="cuerpo"> 
+        <h1> "Calculadora de Calorias con registro de Comidas </h1>
+        <br>
+        <h2>Te damos la Bienvenida</h2>
+        <h3> Nos encanta tenerte aqui</h3>
+        <div>
+            <p> Te explicaremos paso a paso como lograr un calculo exitoso de Calorias a consumir </p>
+            <br>
+            <ul> 
+                <li>Primer paso: Se calcula el Indice Metabolico Basal de la persona. Para ello debes indicarnos tu sexo, edad, estatura y peso en los botones mas abajo-</li> 
+                <br>
+                <li>Segundo paso: Se define objetivo: Aumento, Descenso o mantener peso para calcular KCal a consumir. Tu nos dices que deseas lograr</li>
+                <br>
+                <li>Tercer paso: Una vez que sabemos hacia donde vamos comenzamos a registrar lo consumido, segun horario (tipo), alimento, cantidad. Opcion de eliminar alim.</li>
+                <br>
+                <li>Cuarto: Se genera alerta si el usuario excedió las cantidades diarias objetivo.</li> 
+            </ul>
+        </div>
+    
+        <!-- Evento para determinar el Sexo del usuario-->
+        <div>      
+            <h3> Sexo </h3>
+            <p> por favor indicanos si eres Hombre o Mujer</p>
+            <br>
+            <button id="btnhombre" > Hombre </button>
+            <button id="btnmujer"> Mujer </button>
 
-    <p id="resultado"> </p>
+            <h3> Altura </h3>
+            <p> por favor "Ingrese su altura en centimetros, ej: 1 metro 72 cm sería  172 cm "</p>
+            <br>
+            <input id="estatura">
 
-    </div> 
+            <h3> Peso </h3>
+            <p>"A continuación ingrese su peso en kilogramos, ej: 73.400 kg, 60 kg"</p>
+            <br>
+            <input id="pesaje">
+            <br>
+            <h3> Edad:  </h3>
+            <br>
+            <button id ="btnedadsuma">+</button>
+            <span id ="counteredad">18</span>
+            <button id="btnedadresta">-</button>
+
+        </div>
+        <div>
+            <button id="calcular">Calcular </button>
+            <p id="resultado"> </p>
+            <p id="alerta"></p>
+
+        </div>
+
+    </div>
+
+
+ 
 </body>
 </html>

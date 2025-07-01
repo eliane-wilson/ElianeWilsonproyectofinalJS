@@ -1,0 +1,72 @@
+/*Estilos de Texto*/ 
+h1 {
+  font-family: 'Gorditas', cursive;
+}
+
+p {font-family: 
+  'Open Sans', sans-serif;
+}
+
+/*Estilos de Background*/ 
+
+body {
+  background-image: url(../images/2044289.jpg);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+
+}
+
+.overlay {
+  position: fixed ;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.308); 
+  z-index: 0;
+}
+
+.cuerpo{
+  background-color: rgba(255, 255, 255, 0.74);
+  display: inline-block;
+  border-radius: 10 px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  padding: 3rem auto;
+  text-align: center;
+  color: #000;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+
+.masculino {
+  background-color: #c1ddf8; 
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.masculino input,
+.masculino button {
+  background-color: #b3daff;
+  border: 1px solid #3399ff;
+  color: #000;
+}
+
+.femenino {
+  background-color: #ffe0ec; 
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.femenino input,
+.femenino button {
+  background-color: #ffb3cf;
+  border: 1px solid #cc6699;
+  color: #000;
+}
+
