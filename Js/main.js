@@ -75,31 +75,31 @@ function calculotasametabolicab ( sexo, altura, peso, edad)  {
   }
 
   //Estructura de control para peso : 
-  pesajeInput.onkeyup = () => {
-    const peso = Number(pesajeInput.value)
-    if (peso <= 0 || peso > 700 ) {
-       alertaP.textContent = " Peso inválido. Debe estar entre 1 y 700 kg."
+  //pesajeInput.onkeyup = () => {
+    //const peso = Number(pesajeInput.value)
+    //if (peso <= 0 || peso > 700 ) {
+       //alertaP.textContent = " Peso inválido. Debe estar entre 1 y 700 kg."
     
-      } else {
-        alertaP.textContent = ""
+      //} else {
+        //alertaP.textContent = ""
    
-    }
-  }
+    //}
+  //}
 
 //Estructura de control para altura :
 
-  estaturaInput.onkeyup = () => {
-    const altura = Number(pesajeInput.value)
-    if (altura <= 0 || altura > 250 ) {
-       alertaP.textContent = " Corregir altura debes colocar en centimetros: ej 1 metro 20 serian 120 cm."
+  //estaturaInput.onkeyup = () => {
+    //const altura = Number(pesajeInput.value)
+    //if (altura <= 0 || altura > 250 ) {
+      // alertaP.textContent = " Corregir altura debes colocar en centimetros: ej 1 metro 20 serian 120 cm."
     
-      } else {
-        alertaP.textContent = ""
+      //} else {
+       // alertaP.textContent = ""
    
-    }
-  }
- 
-  
+    //}
+   //}
+
+
   btncalcular.onclick = () => {
     const peso = Number(pesajeInput.value)
     const altura = Number(estaturaInput.value)
@@ -107,10 +107,14 @@ function calculotasametabolicab ( sexo, altura, peso, edad)  {
     if (peso <= 0 || peso > 700 ){
       alertaP.textContent = " Peso inválido. Debe estar entre 1 y 700 kg."
       return
+    } else{ 
+      alertaP.textContent =""
     }
     if (altura <= 0 || altura > 250) {
-      alertaP.textContent = " Corregir altura debes colocar en centimetros: ej 1 metro 20 serian 120 cm."
+      alertaP.textContent = " Corregir altura. Debe ser menor a 250 cm y debes colocar en centimetros como en el ejemplo."
       return
+    }else {
+      alertaP.textContent= "" 
     }
 
     const resultado=calculotasametabolicab(sexo, altura, peso, edad)
@@ -118,10 +122,10 @@ function calculotasametabolicab ( sexo, altura, peso, edad)  {
   }
 
 
-  let resultadotmb = calculotasametabolicab (sexo, altura,peso, edad)
-
+  let resultadotmb=resultado
 
 // Se agregaron alerts y estructuras de control para las variables numericas altura , edad y peso segun correccion //
+ // ETAPA 2 // 
 
 //Para poder calcular las calorias segun objetivo, la formula requiere definir actividad
 
@@ -144,7 +148,7 @@ function calculoactividad (tmb, nivelactividad){
       factoractividad=1.9
       break
     default: 
-      alert ("Opcion incorrecta, se tomará un factor de actividad sedentario por defecto")
+      alertaP.textContent = "Opcion incorrecta, se tomará un factor de actividad sedentario por defecto"
       factoractividad = undefined
   }
   factoractividad = factoractividad ?? 1.2
@@ -152,25 +156,39 @@ function calculoactividad (tmb, nivelactividad){
   return factoractividad*tmb
 
 }
-let caloriasmantenimiento=0 //defini por fuera del if  porque sino tira error en la consola como variable no definida 
+//Vinculo la opcion de html con mi funcion switch 
+const selectActividad = document.getElementById("actividad")
+let caloriasmantenimiento=0 
+selectActividad.onchange=()=>{
+  const actividad =Number(selectActividad.value)
+}
+
 if (resultadotmb !== null) {
-  let actividad = Number (prompt ("Ingresa tu nivel de actividad física:  \n 1-Sedentario \n 2- Ligero \n3-Moderado (3 a 5 veces por semana) \n 4-Intenso (6 a 7 veces por semana) \n 5- Muy Intenso (2 veces por dia)"))
+  
   if (actividad >= 1 && actividad <= 5){
   caloriasmantenimiento = calculoactividad (resultadotmb, actividad)
-  alert("Tu Tasa Metabólica Basal es: " + resultadotmb + "  Calorias por dia")
+  alertaP.textContent="Tu Tasa Metabólica Basal es: " + resultadotmb + "  Calorias por dia"
   console.log("Tu Tasa Metabolica Basal es: " + resultadotmb + " calorías por día")
   console.log("Calorias para mantenimiento es: "+ caloriasmantenimiento + " por dia, manteniendo tu actividad")
   }
 }
 //Array para objetivos de usuario //
 const objetivos = ["bajar de peso", "mantener peso", "ganar masa muscular", "tonificar"]
-let objetivoelegido = "" //defino objetivoelegido fuera del else para que pueda funcionar porque estaba declarada dentro del else{ let objetivo...} porque lo voy a usar mas adelante
-let establecerobjetivo = Number (prompt ("A continuacion ingrese un objetivo :1- Bajar de peso, 2- Mantener, 3-Ganar Masa Muscular, 4-Tonificar "))
-if (establecerobjetivo < 1 || establecerobjetivo > 4 ) {
-  alert("Opción inválida. Recargá la página e intentá de nuevo.");
-} else { 
-  objetivoelegido= objetivos[establecerobjetivo-1]
+let objetivoinput=document.getElementById("meta")
+let objetivoelegido=""
+
+
+objetivoinput.onchange=()=>{
+ 
+  const objetivousuario= Number(objetivoelegido.value)
+  if (objetivousuario>0 && objetivousuario<5){
+    objetivoelegido= objetivos [objetivousuario -1 ]
+    alertaP.textContent= `Tu objetivo elegido es: ${objetivoelegido}`
+  }else{ 
+    alertaP.textContent="Ingresaste un objetivo incorrecto, coloca solo valores del 1 al 4  "
+  }
 }
+
 
 //Calculo cuantas calorias tengo que gastar segun mi objetivo//
 function calcularcaloriasobjetivo(caloriasMantenimiento, objetivo){
@@ -189,7 +207,7 @@ function calcularcaloriasobjetivo(caloriasMantenimiento, objetivo){
       caloriasobjetivo=caloriasmantenimiento - 200
       break
     default:
-      console.log ("Objetivo no reconocido, se toma por defecto mantener peso")
+      alertaP.textContent= "Objetivo no reconocido, se toma por defecto mantener peso"
       caloriasobjetivo=caloriasmantenimiento
   }
   return (caloriasobjetivo)
