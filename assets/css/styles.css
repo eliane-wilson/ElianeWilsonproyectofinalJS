@@ -70,3 +70,19 @@ body {
   color: #000;
 }
 
+/*Estilos de boton*/
+
+.btn-registro {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #6b8e23;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+.btn-registro:hover {
+  background-color: #6a912d;
+}
