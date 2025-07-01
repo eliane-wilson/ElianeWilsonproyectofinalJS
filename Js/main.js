@@ -98,17 +98,20 @@ function calculotasametabolicab ( sexo, altura, peso, edad)  {
    
     }
   }
-
-
-
-
-
  
   
   btncalcular.onclick = () => {
     const peso = Number(pesajeInput.value)
     const altura = Number(estaturaInput.value)
     const edad = Number(edadspam.textContent)
+    if (peso <= 0 || peso > 700 ){
+      alertaP.textContent = " Peso inválido. Debe estar entre 1 y 700 kg."
+      return
+    }
+    if (altura <= 0 || altura > 250) {
+      alertaP.textContent = " Corregir altura debes colocar en centimetros: ej 1 metro 20 serian 120 cm."
+      return
+    }
 
     const resultado=calculotasametabolicab(sexo, altura, peso, edad)
     resultadoaP.textContent = `TMB: ${resultado.toFixed(2)} kcal/día`
