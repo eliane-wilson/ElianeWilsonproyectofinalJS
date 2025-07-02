@@ -24,13 +24,14 @@
             <p> Nombre: </p> <input placeholder="Tu nombre">
             <p> Edad:</p> <input>
             <p> Peso: </p> <input>
+            <p id="objetivoResumen"></p>
 
         </section>
         <div>
             <h3>Registro de Desayuno</h3>
-            <input type="text" id="alimento" placeholder="Alimento">
+            <input type="text" id="alimento" placeholder="Alimento/s">
             <input type="text" id="cantidad" placeholder="Cantidad">
-            <input type="number" id="calorias" placeholder="Calorías">
+            <input type="number" min="0" id="calorias" placeholder="Calorías">
             <input type="text" id="actividad" placeholder="Actividad realizada">
             <button id="guardarDesayuno">Guardar desayuno</button>
 
@@ -41,7 +42,7 @@
             <h3>Registro de Almuerzo</h3>
             <input type="text" id="comida" placeholder="Alimento">
             <input type="text" id="porcion" placeholder="Cantidad">
-            <input type="number" id="caloria" placeholder="Calorías">
+            <input type="number"  min="0" id="caloria" placeholder="Calorías">
             <input type="text" id="act" placeholder="Actividad realizada">
             <button id="guardarAlmuerzo">Guardar Almuerzo</button>
 
@@ -52,7 +53,7 @@
             <h3>Otros Registros (picoteo) </h3>detalle, cant, cal, ejercicio
             <input type="text" id="detalle" placeholder="Alimento">
             <input type="text" id="cant" placeholder="Cantidad">
-            <input type="number" id="cal" placeholder="Calorías">
+            <input type="number"  min="0" id="cal"  placeholder="Calorías">
             <input type="text" id="ejercicio" placeholder="Actividad realizada">
             <button id="guardarPicoteo">Guardar </button>
 
@@ -63,13 +64,19 @@
             <h3>Registrar Cena </h3>
             <input type="text" id="que" placeholder="Alimento">
             <input type="text" id="cuanto" placeholder="Cantidad">
-            <input type="number" id="KCal" placeholder="Calorías">
+            <input type="number"  min="0" id="kcal" placeholder="Calorías">
             <input type="text" id="ejer" placeholder="Actividad realizada">
             <button id="cenaRegistrada">Guardar Cena </button>
 
             <p id="cenaregistrada"></p>
 
         </div>
+        <div>
+            <button id="calcularTotal">Calcular Total de Calorías</button>
+            <p id="totalcalorias"></p>
+
+        </div>
+        
 
 
     </div>

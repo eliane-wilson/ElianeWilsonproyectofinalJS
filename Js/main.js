@@ -194,7 +194,7 @@ objetivoinput.onchange=()=>{
     caloriasobjetivo = calcularcaloriasobjetivo(caloriasmantenimiento, objetivoelegido)
 
     document.getElementById("resultadofinal").innerHTML=  `Tu objetivo es: ${objetivoelegido}  Calorías a consumir: ${caloriasobjetivo} por día manteniendo la misma actividad fisica `
-   
+    localStorage.setItem("caloriasObjetivo", caloriasobjetivo)
     
     //console.log("Calorías objetivo para: " + objetivoelegido + " Total: " + caloriasobjetivo) - para control interno, no se ejecuta
 
