@@ -10,16 +10,69 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&display=swap" rel="stylesheet">
     <!-- Script de J.S -->
-    <script defer src="./Js/main.js"> </script>
+    <script defer src="../../js/main.js"> </script>
     <title>Registro de Calorias  </title>
 </head>
-<body>
+<body class="fondo">
     <div class ="overlay"> </div>
     <div class ="cuerpo"> 
     
         <h1> Mi Registro de Calorias </h1>
         <p>Aquí vas a poder cargar los alimentos que consumís.</p>
-        
+        <section> 
+            <h2>Mi perfil: </h2>
+            <p> Nombre: </p> <input placeholder="Tu nombre">
+            <p> Edad:</p> <input>
+            <p> Peso: </p> <input>
+            <p id="alertaP">  </p>
+            <p id="resultadofinal"> </p>
+        </section>
+        <div>
+            <h3>Registro de Desayuno</h3>
+            <input type="text" id="alimento" placeholder="Alimento">
+            <input type="text" id="cantidad" placeholder="Cantidad">
+            <input type="number" id="calorias" placeholder="Calorías">
+            <input type="text" id="actividad" placeholder="Actividad realizada">
+            <button id="guardarDesayuno">Guardar desayuno</button>
+
+            <p id="desayunoregistrado"></p>
+
+        </div>
+        <div>
+            <h3>Registro de Almuerzo</h3>
+            <input type="text" id="comida" placeholder="Alimento">
+            <input type="text" id="porcion" placeholder="Cantidad">
+            <input type="number" id="caloria" placeholder="Calorías">
+            <input type="text" id="act" placeholder="Actividad realizada">
+            <button id="guardarAlmuerzo">Guardar Almuerzo</button>
+
+            <p id="almuerzoregistrado"></p>
+
+        </div>
+        <div>
+            <h3>Otros Registros (picoteo) </h3>detalle, cant, cal, ejercicio
+            <input type="text" id="detalle" placeholder="Alimento">
+            <input type="text" id="cant" placeholder="Cantidad">
+            <input type="number" id="cal" placeholder="Calorías">
+            <input type="text" id="ejercicio" placeholder="Actividad realizada">
+            <button id="guardarPicoteo">Guardar </button>
+
+            <p id="otroregistro"></p>
+
+        </div>
+         <div>
+            <h3>Registrar Cena </h3>
+            <input type="text" id="que" placeholder="Alimento">
+            <input type="text" id="cuanto" placeholder="Cantidad">
+            <input type="number" id="KCal" placeholder="Calorías">
+            <input type="text" id="ejer" placeholder="Actividad realizada">
+            <button id="cenaRegistrada">Guardar Cena </button>
+
+            <p id="cenaregistrada"></p>
+
+        </div>
+
+
     </div>
     
 

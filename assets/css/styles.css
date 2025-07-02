@@ -9,7 +9,7 @@ p {font-family:
 
 /*Estilos de Background*/ 
 
-body {
+.fondo {
   background-image: url(../images/2044289.jpg);
   background-position: center;
   background-size: cover;
@@ -43,6 +43,12 @@ body {
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
+.backblog{
+background-color: #d7eedb;
+opacity: 0.8;
+background-image: linear-gradient(to right, #e3f4e0, #e3f4e0 20px, #d7eedb 20px, #d7eedb );
+background-size: 40px 100%;
+}
 
 .masculino {
   background-color: #c1ddf8; 
@@ -85,4 +91,31 @@ body {
 }
 .btn-registro:hover {
   background-color: #6a912d;
+}
+
+/*Estilos de texto */
+
+.small {
+  justify-content: center; 
+  align-items: center;
+  z-index: 1;
+  padding: 3rem auto;
+  text-align:left;
+  color: #000;
+  font-style: italic;
+}
+
+/*Estilos footer */
+
+footer nav a {
+  font-weight: bold;
+  padding: 10px;
+  color: white;
+  background-color: #19c8e7;
+  border-radius: 5px;
+  margin: 0 5px;
+}
+
+footer nav a:hover {
+  background-color: #5639a7;
 }
