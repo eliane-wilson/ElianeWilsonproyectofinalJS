@@ -1,6 +1,5 @@
-//Primer paso: Calcular el Indice Metabolico Basal del usuario: 
+// Indice Metabolico Basal  
 
-//Definir varaibles para eventos - se reemplazan los prompt, alert y consolelog. //
 
 let sexo = "" 
 const btnhombre = document.getElementById("btnhombre")
@@ -9,13 +8,13 @@ const estaturaInput = document.getElementById("estatura")
 const pesajeInput = document.getElementById("pesaje")
 const edadInput = document.getElementById("edad")
 const resultadoaP = document.getElementById("resultado")
-const alertaP = document.getElementById("alerta") //Reemplazo el alert con un texto en html//
+const alertaP = document.getElementById("alerta") 
 const alertain= document.getElementById("alertain") 
 const btncalcular = document.getElementById("calcular")
 let resultadotmb = null
 
 
-//Primera interaccion: evento con Botones para definir sexo // 
+//Sexo // 
 
 btnhombre.onclick= () =>{
   sexo = "hombre"
@@ -27,7 +26,6 @@ btnmujer.onclick =() =>{
   resultadoaP.textContent = "Sexo seleccionado: Mujer"
 }
 
-//Definicion de funcion de calculo // 
 
 function calculotasametabolicab ( sexo, altura, peso, edad)  {
     let tmetbasal= 0
@@ -42,7 +40,7 @@ function calculotasametabolicab ( sexo, altura, peso, edad)  {
   return tmetbasal
 }
 
-  //Armado del boton Edad con estructura de control: se desactiva cuando llega a cero y a 150 años //
+  //Edad 
 
 
   let edadspam=document.getElementById("counteredad")
@@ -76,31 +74,31 @@ function calculotasametabolicab ( sexo, altura, peso, edad)  {
     }
   }
 
-  //Estructura de control para peso : 
-  //pesajeInput.onkeyup = () => {
-    //const peso = Number(pesajeInput.value)
-    //if (peso <= 0 || peso > 700 ) {
-       //alertaP.textContent = " Peso inválido. Debe estar entre 1 y 700 kg."
-    
-      //} else {
-        //alertaP.textContent = ""
-   
-    //}
-  //}
+  //Altura 
+  let alturaSpan = document.getElementById("counteraltura")
+  let contadorAltura = 160
+  let btnAlturaSumar = document.getElementById("btnalturasuma")
+  let btnAlturaRestar = document.getElementById("btnalturaresta")
 
-//Estructura de control para altura :
+  btnAlturaSumar.onclick = () => {
+    if (contadorAltura < 250) {
+        contadorAltura++
+        alturaSpan.textContent = contadorAltura
+        btnAlturaRestar.disabled = false
+    } else {
+        btnAlturaSumar.disabled = true
+    }
+  }
 
-  //estaturaInput.onkeyup = () => {
-    //const altura = Number(pesajeInput.value)
-    //if (altura <= 0 || altura > 250 ) {
-      // alertaP.textContent = " Corregir altura debes colocar en centimetros: ej 1 metro 20 serian 120 cm."
-    
-      //} else {
-       // alertaP.textContent = ""
-   
-    //}
-   //}
-
+  btnAlturaRestar.onclick = () => {
+    if (contadorAltura > 30) {
+        contadorAltura--
+        alturaSpan.textContent = contadorAltura
+        btnAlturaSumar.disabled = false
+    } else {
+        btnAlturaRestar.disabled = true
+    }
+  }
    
 
 
@@ -108,33 +106,25 @@ function calculotasametabolicab ( sexo, altura, peso, edad)  {
   btncalcular.onclick = () => {
     
     const peso = Number(pesajeInput.value)
-    const altura = Number(estaturaInput.value)
+    const altura = Number(alturaSpan.textContent)
     const edad = Number(edadspam.textContent)
-    if (peso <= 0 || peso > 700 ){
-      alertaP.textContent = " Peso inválido. Debe estar entre 1 y 700 kg."
-      return
-    } else{ 
-      alertaP.textContent =""
-    }
-    if (altura <= 0 || altura > 250) {
-      alertaP.textContent = " Corregir altura. Debe ser menor a 250 cm y debes colocar en centimetros como en el ejemplo."
-      return
-    }else {
-      alertaP.textContent= "" 
-    }
+    
 
-    const resultado=calculotasametabolicab(sexo, altura, peso, edad)
+    const resultado= calculotasametabolicab(sexo, altura, peso, edad)
     resultadoaP.textContent = `TMB: ${resultado.toFixed(2)} kcal/día`
-    resultadotmb = calculotasametabolicab(sexo, altura, peso, edad)
+    resultadotmb = resultado
+
+    localStorage.setItem("sexo", sexo)
+    localStorage.setItem("edad", edad)
+    localStorage.setItem("peso", peso)
+    localStorage.setItem("altura", altura)
+    localStorage.setItem("tmb", resultado.toFixed(2))
+
   }
 
 
-  
 
-// Se agregaron alerts y estructuras de control para las variables numericas altura , edad y peso segun correccion //
- // ETAPA 2 // 
-
-//Para poder calcular las calorias segun objetivo, la formula requiere definir actividad
+  //Actividad //
 
 function calculoactividad (tmb, nivelactividad){
   let factoractividad

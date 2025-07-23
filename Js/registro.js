@@ -1,6 +1,6 @@
-// Parte II - Iniciamos con los registros de calorias - armo elementos de clases  // 
+// Registros // 
 
-const objetivoGuardado = localStorage.getItem("caloriasObjetivo") //calculado anteriormente // 
+const objetivoGuardado = localStorage.getItem("caloriasObjetivo")  
 if (objetivoGuardado) {
   document.getElementById("objetivoResumen").textContent =
     `Tu objetivo diario es de ${objetivoGuardado} kcal.`
@@ -125,11 +125,29 @@ function consumidoeneldia () {
     if (cenaDia1) totalcons += cenaDia1.kcal*Number (cenaDia1.cuanto)
 
   document.getElementById("totalcalorias").textContent = `Total consumido hoy: ${totalcons} calorías.`
+  return totalcons 
 }
 
 document.getElementById("calcularTotal").addEventListener("click", consumidoeneldia)
 
 
 
-// Local Storage: Como queremos hacer un seguimiento vamos a guardar la info principal. 
-//Info de perfil  
+// Dinamica// 
+
+function mostrarDiferencia() {
+  
+  const caloriasObjetivo = Number(localStorage.getItem("caloriasObjetivo"))
+  const totalConsumido =consumidoeneldia()
+  const diferencia = caloriasObjetivo - totalConsumido
+
+  const balanza = document.getElementById("resultadoCalorias")
+  
+  if (diferencia > 0) {
+    balanza.textContent = `Te quedan ${diferencia} calorías por consumir.`
+  } else if (diferencia === 0) {
+    balanza.textContent = "¡Has alcanzado tu objetivo calórico del día! ¡Felicidades! "
+  } else {
+    balanza.textContent = `¡Cuidado! Te pasaste por ${diferencia} calorías.`
+  }
+  
+}
