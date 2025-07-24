@@ -1,6 +1,7 @@
 // Indice Metabolico Basal  
 
 
+
 let sexo = "" 
 const btnhombre = document.getElementById("btnhombre")
 const btnmujer = document.getElementById("btnmujer")
@@ -39,6 +40,7 @@ function calculotasametabolicab ( sexo, altura, peso, edad)  {
     }
   return tmetbasal
 }
+
 
   //Edad 
 
@@ -108,7 +110,25 @@ function calculotasametabolicab ( sexo, altura, peso, edad)  {
     const peso = Number(pesajeInput.value)
     const altura = Number(alturaSpan.textContent)
     const edad = Number(edadspam.textContent)
-    
+
+    if (sexo !== "hombre" && sexo !== "mujer") {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Por favor, seleccioná tu sexo antes de calcular.",
+      })
+      return
+    }
+
+    if (isNaN(peso) || peso <= 0 || peso > 700) {
+      Swal.fire({
+        icon: "error",
+        title: "Peso inválido",
+        text: "Ingresá un peso válido entre 1 y 700 kg.",
+      })
+      return
+    }
+      
 
     const resultado= calculotasametabolicab(sexo, altura, peso, edad)
     resultadoaP.textContent = `TMB: ${resultado.toFixed(2)} kcal/día`
@@ -149,32 +169,54 @@ function calculoactividad (tmb, nivelactividad){
       factoractividad = undefined
   }
   factoractividad = factoractividad ?? 1.2
-  //si el usuario ingresa una opcion incorrecta se toma una actividad sedentaria por defecto //
+  
   return factoractividad*tmb
 
 }
-//Vinculo la opcion de html con mi funcion switch 
+
+
 const selectActividad = document.getElementById("actividad")
 let caloriasmantenimiento=0 
 selectActividad.onchange=()=>{
   const actividad =Number(selectActividad.value)
 
-  if (resultadotmb !== null && actividad >= 1 && actividad <= 5){
-  caloriasmantenimiento = calculoactividad (resultadotmb, actividad)
-  alertain.textContent=`Tu Tasa Metabólica Basal es: ${resultadotmb} kcal por día. /n Calorías para mantenimiento: ${caloriasmantenimiento} kcal por día`
-  //console.log("Tu Tasa Metabolica Basal es: " + resultadotmb + " calorías por día")
-  //console.log("Calorias para mantenimiento es: "+ caloriasmantenimiento + " por dia, manteniendo tu actividad")
+    if (resultadotmb === null) {
+      Swal.fire({
+        icon: "warning",
+        title: "TMB no calculada",
+        text: "Primero completá correctamente tu sexo, edad, peso y altura para calcular la Tasa Metabólica Basal.",
+      })
+      return
+    }
+
+    if (actividad >= 1 && actividad <= 5) {
+      caloriasmantenimiento = calculoactividad(resultadotmb, actividad)
+      alertain.textContent = `Tu Tasa Metabólica Basal es: ${resultadotmb} kcal por día. Calorías para mantenimiento: ${caloriasmantenimiento} kcal por día`
+    }
   }
-  }
-//Array para objetivos de usuario //
+  
+
 const objetivos = ["bajar de peso", "mantener peso", "ganar masa muscular", "tonificar"]
 let objetivoinput=document.getElementById("meta")
 let objetivoelegido=""
 let caloriasobjetivo=0
 
+
+ 
 objetivoinput.onchange=()=>{
  
   const objetivousuario= Number(objetivoinput.value)
+
+  if (resultadotmb === null || caloriasmantenimiento === 0) {
+    Swal.fire({
+      icon: "warning",
+      title: "Faltan datos previos",
+      text: "Para calcular las calorías objetivo, primero debés obtener tu TMB y seleccionar el nivel de actividad.",
+    })
+    return
+  }
+
+  
   if (objetivousuario>0 && objetivousuario<5){
     objetivoelegido= objetivos [objetivousuario -1 ]
     alertaP.textContent= `Tu objetivo elegido es: ${objetivoelegido}`
@@ -182,19 +224,43 @@ objetivoinput.onchange=()=>{
 
 
     caloriasobjetivo = calcularcaloriasobjetivo(caloriasmantenimiento, objetivoelegido)
+    Swal.fire({
+      title: `¡Objetivo establecido!`,
+      html: `
+        <p style="font-size: 1.2em;">
+          <strong>Tu objetivo:</strong> ${objetivoelegido}<br>
+          <strong>Calorías a consumir:</strong> ${caloriasobjetivo} kcal/día
+        </p>
+      `,
+      width: 600,
+      padding: "2em",
+      color: "#2b2b2b",
+      background: "#fff url('https://sweetalert2.github.io/images/trees.png')",
+  backdrop: `
+    rgba(0,0,123,0.3)
+    url("https://media.giphy.com/media/VQGvAbGi4IRaw9sE1U/giphy.gif")
+    center top
+    no-repeat
+      `
+    })
 
     document.getElementById("resultadofinal").innerHTML=  `Tu objetivo es: ${objetivoelegido}  Calorías a consumir: ${caloriasobjetivo} por día manteniendo la misma actividad fisica `
     localStorage.setItem("caloriasObjetivo", caloriasobjetivo)
     
-    //console.log("Calorías objetivo para: " + objetivoelegido + " Total: " + caloriasobjetivo) - para control interno, no se ejecuta
 
   }else{ 
-    alertain.textContent="Ingresaste un objetivo incorrecto, coloca solo valores del 1 al 4  "
+     Swal.fire({
+      icon: "warning",
+      title: "Ingresaste un objetivo Incorrecto",
+      text: "Para continuar debes colocar un valor entre 1 y 4, segun tu objetivo",
+    })
+    return
+
   }
 }
 
+//Calorias objetivo//
 
-//Calculo cuantas calorias tengo que gastar segun mi objetivo//
 function calcularcaloriasobjetivo(caloriasMantenimiento, objetivo){
   
   switch (objetivo.toLowerCase()){
