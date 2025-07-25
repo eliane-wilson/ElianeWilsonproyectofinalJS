@@ -1,22 +1,142 @@
-document.getElementById("guardarPerfil").addEventListener("click", () => {
-  const nombre = document.getElementById("nombreUsuario").value.trim()
-  const edad = parseInt(document.getElementById("edadUsuario").value)
-  const peso = parseFloat(document.getElementById("pesoUsuario").value)
+//Perfil//
+const inputNombre = document.getElementById("nombreUsuario")
+const btnGuardar = document.getElementById("guardarPerfil")
 
-  const perfil = { nombre, edad, peso }
-  localStorage.setItem("perfilUsuario", JSON.stringify(perfil))
+document.getElementById("edadMostrada").textContent = (localStorage.getItem("edad") ) + " años"
+document.getElementById("pesoMostrado").textContent = (localStorage.getItem("peso") ) + " kg"
+document.getElementById("alturaMostrada").textContent = (localStorage.getItem("altura") ) + " cm"
+document.getElementById("tmbMostrada").textContent = (localStorage.getItem("tmb") ) + " kcal"
+
+const perfilGuardado = JSON.parse(localStorage.getItem("perfilUsuario"))
+if (perfilGuardado && perfilGuardado.nombre) {
+  inputNombre.value = perfilGuardado.nombre
+}
+
+btnGuardar.addEventListener("click", () => {
+  const nombre = inputNombre.value.trim()
+
+  if (!nombre) {
+    Swal.fire({
+      icon: "warning",
+      title: "Campo vacío",
+      text: "Necesitamos tu nombre en el Perfil",
+    })
+    return
+  }
 
   Swal.fire({
-    position: "top-end",
-    icon: "success",
-    title: "¡Perfil guardado con éxito!",
-    showConfirmButton: false,
-    timer: 1500
+    title: "¿Querés guardar los cambios?",
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: "Guardar",
+    denyButtonText: `No guardar`
+  }).then((result) => {
+    if (result.isConfirmed) {
+      try {
+        const nuevoPerfil = {
+          nombre,
+          sexo: localStorage.getItem("sexo") || "",
+          edad: Number(localStorage.getItem("edad")) || 0,
+          peso: Number(localStorage.getItem("peso")) || 0,
+          altura: Number(localStorage.getItem("altura")) || 0,
+          tmb: Number(localStorage.getItem("tmb")) || 0
+        }
+
+        localStorage.setItem("perfilUsuario", JSON.stringify(nuevoPerfil))
+
+        Swal.fire("¡Guardado!", "Tu perfil fue actualizado con éxito.", "success")
+      } catch (error) {
+        (error)
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Ocurrió un error al guardar el perfil.",
+        })
+      }
+
+    } else if (result.isDenied) {
+      Swal.fire({
+        icon: "error",
+        title: "Cambios descartados",
+        text: "Los cambios no fueron guardados.",
+      })
+    }
   })
 })
-
+  
 
 // Registros // 
+
+const selectDesayuno = document.getElementById("alimentoDesayuno")
+const selectAlmuerzo = document.getElementById("alimentoAlmuerzo")
+const selectPicoteo = document.getElementById("alimentoPicoteo")
+const selectCena = document.getElementById("alimentoCena")
+const URLlistado="../../db/data.json"
+let calAlimento={}
+
+function cargarLibreriaJson(){
+  fetch(URLlistado)
+  .then (response=> response.json ())
+  .then (data => {
+    data.forEach(alimento => {
+      console.log("Alimentos cargados:", data)
+
+      calAlimento[alimento.nombre] = alimento
+
+      const option =document.createElement ("option")
+      option.value=alimento.nombre
+      option.textContent = alimento.nombre
+
+      selectDesayuno.appendChild(option.cloneNode(true))
+      selectAlmuerzo.appendChild(option.cloneNode(true))
+      selectPicoteo.appendChild(option.cloneNode(true))
+      selectCena.appendChild(option.cloneNode(true))
+
+    })
+  .catch(error => {
+      (error)
+
+})
+})
+}
+
+
+cargarLibreriaJson()
+
+//automatizacion calorias//
+
+selectDesayuno.addEventListener("change", () => {
+  const seleccionado = selectDesayuno.value
+  const info = calAlimento[seleccionado]
+  if (info) {
+    document.getElementById("calorias").value = info.calorias
+  }
+})
+
+selectAlmuerzo.addEventListener("change", () => {
+  const seleccionado = selectAlmuerzo.value
+  const info = calAlimento[seleccionado]
+  if (info) {
+    document.getElementById("caloria").value = info.calorias
+  }
+})
+
+selectPicoteo.addEventListener("change", () => {
+  const seleccionado = selectPicoteo.value
+  const info = calAlimento[seleccionado]
+  if (info) {
+    document.getElementById("cal").value = info.calorias
+  }
+})
+
+selectCena.addEventListener("change", () => {
+  const seleccionado = selectCena.value
+  const info = calAlimento[seleccionado]
+  if (info) {
+    document.getElementById("kcal").value = info.calorias
+  }
+})
+
 
 const objetivoGuardado = localStorage.getItem("caloriasObjetivo")  
 if (objetivoGuardado) {
@@ -71,16 +191,40 @@ let almuerzoDia1 = null
 let picoteoDia1 = null
 let cenaDia1 = null
 
+//json 
+
+function obtenerRegistros(id) {
+  let registros = JSON.parse(localStorage.getItem("registrosComida")) || {}
+  if (!registros[id]) {
+    registros[id] = {
+      desayuno: [],
+      almuerzo: [],
+      picoteo: [],
+      cena: []
+    }
+  }
+  return registros
+}
+
+
+function guardarRegistro(id, tipoComida, item) {
+  const registros = obtenerRegistros(id)
+  registros[id][tipoComida].push(item)
+  localStorage.setItem("registrosComida", JSON.stringify(registros))
+}
+
 
 
 document.getElementById("guardarDesayuno").addEventListener("click", () => {
-  const alimento = document.getElementById("alimento").value
+  const alimento = document.getElementById("alimentoDesayuno").value
   const cantidad = document.getElementById("cantidad").value
   const calorias = Number(document.getElementById("calorias").value)
   const actividad = document.getElementById("actividad").value
+  
   if (alimento && cantidad && !isNaN(calorias )&& calorias >=0){
-    desayunoDia1 = new Desayuno(alimento, cantidad, calorias, actividad)
-    document.getElementById("desayunoregistrado").textContent = `Registrado: ${desayunoDia1.alimento} - ${desayunoDia1.cantidad} - ${desayunoDia1.calorias} cal - Actividad: ${desayunoDia1.actividad}`
+   const nuevoDesayuno = new Desayuno(alimento, cantidad, calorias, actividad)
+   guardarRegistro (idActual, "desayuno", nuevoDesayuno)
+   document.getElementById("desayunoregistrado").textContent = `Registrado: ${alimento} - ${cantidad} - ${calorias} cal - Actividad: ${actividad}`
 
   } else {
      document.getElementById("desayunoregistrado").textContent=`Revisar datos cargados`
@@ -94,8 +238,9 @@ document.getElementById("guardarAlmuerzo").addEventListener("click", () => {
   const caloria = Number(document.getElementById("caloria").value)
   const act = document.getElementById("act").value
     if (comida && porcion && !isNaN(caloria) && caloria >=0){
-    almuerzoDia1 = new Almuerzo(comida, porcion, caloria, act)
-    document.getElementById("almuerzoregistrado").textContent = `Registrado: ${almuerzoDia1.comida} - ${almuerzoDia1.porcion} - ${almuerzoDia1.caloria} cal - Actividad: ${almuerzoDia1.act}`
+    const nuevoAlmuerzo = new Almuerzo(comida, porcion, caloria, act) 
+    guardarRegistro(idActual, "almuerzo", nuevoAlmuerzo)
+    document.getElementById("almuerzoregistrado").textContent = `Registrado: ${comida} - ${porcion} - ${caloria} cal - Actividad: ${act}`
 
   } else {
      document.getElementById("almuerzoregistrado").textContent=`Revisar datos cargados`
@@ -104,13 +249,14 @@ document.getElementById("guardarAlmuerzo").addEventListener("click", () => {
 })
   
 document.getElementById("guardarPicoteo").addEventListener("click", () => {
-  const detalle = document.getElementById("detalle").value
+  const detalle = document.getElementById("alimentoPicoteo").value
   const cant = document.getElementById("cant").value
   const cal= Number(document.getElementById("cal").value)
   const ejercicio = document.getElementById("ejercicio").value
   if (detalle && cant && !isNaN(cal )&& cal >=0){
-    picoteoDia1 = new Merienda(detalle, cant, cal, ejercicio)
-    document.getElementById("otroregistro").textContent = `Registrado: ${picoteoDia1.detalle} - ${picoteoDia1.cant} - ${picoteoDia1.cal} cal - Actividad: ${picoteoDia1.ejercicio}`
+    const nuevoPicoteo = new Merienda(detalle, cant, cal, ejercicio)
+    guardarRegistro(idActual, "picoteo", nuevoPicoteo)
+    document.getElementById("otroregistro").textContent = `Registrado: ${detalle} - ${cant} - ${cal} cal - Actividad: ${ejercicio}`
 
   } else {
      document.getElementById("otroregistro").textContent=`Revisar datos cargados`
@@ -119,13 +265,14 @@ document.getElementById("guardarPicoteo").addEventListener("click", () => {
 })
 
 document.getElementById("cenaRegistrada").addEventListener("click", () => {
-  const que = document.getElementById("que").value
+  const que = document.getElementById("alimentoCena").value
   const cuanto = document.getElementById("cuanto").value
   const kcal = Number(document.getElementById("kcal").value)
   const ejer = document.getElementById("ejer").value
   if (que && cuanto  && !isNaN(kcal ) && kcal >=0){
-    cenaDia1 = new Cena(que, cuanto, kcal, ejer )
-    document.getElementById("cenaregistrada").textContent = `Registrado: ${cenaDia1.que} - ${cenaDia1.cuanto} - ${cenaDia1.kcal} cal - Actividad: ${cenaDia1.ejer}`
+    const nuevaCena = new Cena(que, cuanto, kcal, ejer)
+    guardarRegistro(idActual, "cena", nuevaCena)
+    document.getElementById("cenaregistrada").textContent = `Registrado: ${que} - ${cuanto} - ${kcal} cal - Actividad: ${ejer}`
 
   } else {
      document.getElementById("cenaregistrada").textContent=`Revisar datos cargados`
@@ -135,12 +282,22 @@ document.getElementById("cenaRegistrada").addEventListener("click", () => {
 
 
 function consumidoeneldia () { 
-    let totalcons=0
+  const registros = obtenerRegistros(idActual)
+  let totalcons = 0;
 
-    if (desayunoDia1) totalcons += desayunoDia1.calorias*Number (desayunoDia1.cantidad)
-    if (almuerzoDia1) totalcons += almuerzoDia1.caloria*Number(almuerzoDia1.porcion)
-    if (picoteoDia1) totalcons += picoteoDia1.cal*Number(picoteoDia1.cant)
-    if (cenaDia1) totalcons += cenaDia1.kcal*Number (cenaDia1.cuanto)
+  registros[idActual].desayuno.forEach(item => {
+    if (item.calorias && item.cantidad) totalcons += item.calorias * Number(item.cantidad)
+    
+  });
+  registros[idActual].almuerzo.forEach(item => {
+   if (item.caloria && item.porcion) totalcons += item.caloria * Number(item.porcion)
+  });
+  registros[idActual].picoteo.forEach(item => {
+    if (item.cal && item.cant) totalcons += item.cal * Number(item.cant)
+  });
+  registros[idActual].cena.forEach(item => {
+    if (item.cal && item.cant) totalcons += item.cal * Number(item.cant)
+  })
 
   document.getElementById("totalcalorias").textContent = `Total consumido hoy: ${totalcons} calorías.`
   return totalcons 

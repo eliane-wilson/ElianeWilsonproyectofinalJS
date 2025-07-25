@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Vanilla Calendar CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-calendar@1.4.0/build/vanilla-calendar.min.css">
+
+     <!-- Vanilla Calendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-calendar@1.4.0/build/vanilla-calendar.min.js"></script>
+
+
+
     <!--- integracion CSS -->
     <link rel="stylesheet" href="../css/styles.css">
     <!-- Fuentes -->
@@ -21,7 +29,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../../index.html">Calorías</a>
+            <a class="navbar-brand" href="../../index.html">Calculadora</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContenido" aria-controls="navbarContenido" aria-expanded="false" aria-label="Menú de navegación">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -35,6 +43,9 @@
                 <a class="nav-link" href="#top">Volver arriba</a>
                 </li>
                 <li class="nav-item">
+                <a class="nav-link" href="alimentoskcal.html">Listado de Alimentos</a>
+                </li>
+                 <li class="nav-item">
                 <a class="nav-link" href="blog.html">Nuestro Blog informativo</a>
                 </li>
             </ul>
@@ -46,12 +57,13 @@
     <div class ="cuerpo"> 
     
         <h1 id="top"> Mi Registro de Calorias </h1>
-        <p>Aquí vas a poder cargar los alimentos que consumís.</p>
+        <p>Aquí vas a poder cargar los alimentos que consumís. </p>
         <section> 
             <h2>Mi perfil: </h2>
+            <p> Te recomendamos guardar tu perfil para un mejor seguimiento. </p>
             <p> Nombre: </p> <input id="nombreUsuario" placeholder="Tu nombre">
               <div class="mt-3">
-                <p><strong>Sexo:</strong> <span id="sexoMostrado"></span></p>
+               
                 <p><strong>Edad:</strong> <span id="edadMostrada"></span></p>
                 <p><strong>Peso:</strong> <span id="pesoMostrado"></span></p>
                 <p><strong>Altura:</strong> <span id="alturaMostrada"></span></p>
@@ -71,8 +83,10 @@
 
         <div>
             <h3>Registro de Desayuno</h3>
-            <input type="text" id="alimento" placeholder="Alimento/s">
-            <input type="text" id="cantidad" placeholder="Cantidad">
+            <select id="alimentoDesayuno" class="form-select">
+                <option value="">Seleccioná un alimento</option>
+            </select>
+            <input type="number" min ="0" id="cantidad" placeholder="Cantidad">
             <input type="number" min="0" id="calorias" placeholder="Calorías">
             <input type="text" id="actividad" placeholder="Actividad realizada">
             <button id="guardarDesayuno">Guardar desayuno</button>
@@ -82,8 +96,11 @@
         </div>
         <div>
             <h3>Registro de Almuerzo</h3>
+            <select id="alimentoAlmuerzo" class="form-select">
+                <option value=""> Selecciona un alimento</option>
+            </select>
             <input type="text" id="comida" placeholder="Alimento">
-            <input type="text" id="porcion" placeholder="Cantidad">
+            <input type="number" min="0" id="porcion" placeholder="Cantidad">
             <input type="number"  min="0" id="caloria" placeholder="Calorías">
             <input type="text" id="act" placeholder="Actividad realizada">
             <button id="guardarAlmuerzo">Guardar Almuerzo</button>
@@ -93,8 +110,10 @@
         </div>
         <div>
             <h3>Otros Registros (picoteo) </h3>detalle, cant, cal, ejercicio
-            <input type="text" id="detalle" placeholder="Alimento">
-            <input type="text" id="cant" placeholder="Cantidad">
+            <select id="alimentoPicoteo" class="form-select">
+                <option value=""> Selecciona un alimento</option>
+            </select>
+            <input type="number" min="0" id="cant" placeholder="Cantidad">
             <input type="number"  min="0" id="cal"  placeholder="Calorías">
             <input type="text" id="ejercicio" placeholder="Actividad realizada">
             <button id="guardarPicoteo">Guardar </button>
@@ -104,8 +123,10 @@
         </div>
          <div>
             <h3>Registrar Cena </h3>
-            <input type="text" id="que" placeholder="Alimento">
-            <input type="text" id="cuanto" placeholder="Cantidad">
+            <select id="alimentoCena" class="form-select">
+                <option value=""> Selecciona un alimento</option>
+            </select>
+            <input type="number" min="0" id="cuanto" placeholder="Cantidad">
             <input type="number"  min="0" id="kcal" placeholder="Calorías">
             <input type="text" id="ejer" placeholder="Actividad realizada">
             <button id="cenaRegistrada">Guardar Cena </button>
@@ -126,6 +147,10 @@
 
 
     </div>
+
+    <div id="myCalendar"></div>
+
+
     <footer class="bg-dark text-white pt-4 mt-5">
         <div class="container text-center text-md-start">
             <div class="row">
@@ -148,8 +173,8 @@
         </div>
     </footer>
 
-
-
+<!---sweet alert -->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 </html>
