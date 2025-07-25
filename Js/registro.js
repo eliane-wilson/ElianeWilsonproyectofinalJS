@@ -328,15 +328,4 @@ function mostrarDiferencia() {
   
 }
 
-//Vainilla //
-let idActual = new Date().toISOString().slice(0, 10)
-document.addEventListener('DOMContentLoaded', () => {
-  const calendar = new VanillaCalendar("#myCalendar", {
-    onSelect({ date }) {
-      idActual = date
-      mostrarRegistrosPorFecha(idActual)
-    }
-  })
 
-  calendar.init()
-})
