@@ -46,7 +46,7 @@ btnGuardar.addEventListener("click", () => {
 
         Swal.fire("¡Guardado!", "Tu perfil fue actualizado con éxito.", "success")
       } catch (error) {
-        (error)
+        
         Swal.fire({
           icon: "error",
           title: "Error",
@@ -65,6 +65,7 @@ btnGuardar.addEventListener("click", () => {
 })
   
 
+
 // Registros // 
 
 const selectDesayuno = document.getElementById("alimentoDesayuno")
@@ -79,7 +80,7 @@ function cargarLibreriaJson(){
   .then (response=> response.json ())
   .then (data => {
     data.forEach(alimento => {
-      console.log("Alimentos cargados:", data)
+      
 
       calAlimento[alimento.nombre] = alimento
 
@@ -93,10 +94,11 @@ function cargarLibreriaJson(){
       selectCena.appendChild(option.cloneNode(true))
 
     })
-  .catch(error => {
-      (error)
+  
 
-})
+  })
+  .catch(error => {
+     
 })
 }
 
@@ -269,14 +271,13 @@ document.getElementById("cenaRegistrada").addEventListener("click", () => {
   const cuanto = document.getElementById("cuanto").value
   const kcal = Number(document.getElementById("kcal").value)
   const ejer = document.getElementById("ejer").value
-  if (que && cuanto  && !isNaN(kcal ) && kcal >=0){
-    const nuevaCena = new Cena(que, cuanto, kcal, ejer)
-    guardarRegistro(idActual, "cena", nuevaCena)
+
+  if (que && cuanto && !isNaN(kcal) && kcal >= 0) {
+    const nuevaCena = new Cena(que, cuanto, kcal, ejer) 
+    guardarRegistro(idActual, "cena", nuevaCena) 
     document.getElementById("cenaregistrada").textContent = `Registrado: ${que} - ${cuanto} - ${kcal} cal - Actividad: ${ejer}`
-
   } else {
-     document.getElementById("cenaregistrada").textContent=`Revisar datos cargados`
-
+    document.getElementById("cenaregistrada").textContent = `Revisar datos cargados`
   }
 })
 
@@ -296,7 +297,7 @@ function consumidoeneldia () {
     if (item.cal && item.cant) totalcons += item.cal * Number(item.cant)
   });
   registros[idActual].cena.forEach(item => {
-    if (item.cal && item.cant) totalcons += item.cal * Number(item.cant)
+    if (item.kcal && item.cuanto) totalcons += item.kcal * Number(item.cuanto)
   })
 
   document.getElementById("totalcalorias").textContent = `Total consumido hoy: ${totalcons} calorías.`
@@ -327,3 +328,15 @@ function mostrarDiferencia() {
   
 }
 
+//Vainilla //
+let idActual = new Date().toISOString().slice(0, 10)
+document.addEventListener('DOMContentLoaded', () => {
+  const calendar = new VanillaCalendar("#myCalendar", {
+    onSelect({ date }) {
+      idActual = date
+      mostrarRegistrosPorFecha(idActual)
+    }
+  })
+
+  calendar.init()
+})
