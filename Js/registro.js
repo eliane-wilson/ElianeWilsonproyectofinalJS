@@ -1,3 +1,21 @@
+document.getElementById("guardarPerfil").addEventListener("click", () => {
+  const nombre = document.getElementById("nombreUsuario").value.trim()
+  const edad = parseInt(document.getElementById("edadUsuario").value)
+  const peso = parseFloat(document.getElementById("pesoUsuario").value)
+
+  const perfil = { nombre, edad, peso }
+  localStorage.setItem("perfilUsuario", JSON.stringify(perfil))
+
+  Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "¡Perfil guardado con éxito!",
+    showConfirmButton: false,
+    timer: 1500
+  })
+})
+
+
 // Registros // 
 
 const objetivoGuardado = localStorage.getItem("caloriasObjetivo")  
@@ -151,3 +169,4 @@ function mostrarDiferencia() {
   }
   
 }
+

@@ -134,3 +134,28 @@ footer nav a:hover {
 html {
   scroll-behavior: smooth;
 }
+
+/* Boton*/
+
+@keyframes latido {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.btn-latido {
+  animation: latido 1.5s infinite;
+  font-weight: 700;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(0,123,255,0.4);
+  transition: box-shadow 0.3s ease;
+}
+
+.btn-latido:hover {
+  box-shadow: 0 6px 20px rgba(0,123,255,0.7);
+  text-decoration: none;
+}
+
