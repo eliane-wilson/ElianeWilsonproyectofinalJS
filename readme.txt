@@ -32,8 +32,8 @@ Funcionalidades Principales:
 
 
 *Frameworks utilizados: Bootstrap 
-*Librerias: SweetAlert2
-		Toastify 
+*Librerias: SweetAlert2 , Vainilla Calendar 
+		
 *Lenguajes empleados:
 HTML5 - CSS - JavaScript 
 
