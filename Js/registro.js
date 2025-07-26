@@ -75,6 +75,8 @@ const selectCena = document.getElementById("alimentoCena")
 const URLlistado="../../db/data.json"
 let calAlimento={}
 
+
+
 function cargarLibreriaJson(){
   fetch(URLlistado)
   .then (response=> response.json ())
@@ -195,6 +197,8 @@ let cenaDia1 = null
 
 //json 
 
+const idActual = new Date().toISOString().split('T')[0]
+
 function obtenerRegistros(id) {
   let registros = JSON.parse(localStorage.getItem("registrosComida")) || {}
   if (!registros[id]) {
@@ -235,7 +239,7 @@ document.getElementById("guardarDesayuno").addEventListener("click", () => {
 })
   
 document.getElementById("guardarAlmuerzo").addEventListener("click", () => {
-  const comida = document.getElementById("comida").value
+  const comida = document.getElementById("alimentoAlmuerzo").value
   const porcion = document.getElementById("porcion").value
   const caloria = Number(document.getElementById("caloria").value)
   const act = document.getElementById("act").value
@@ -304,28 +308,58 @@ function consumidoeneldia () {
   return totalcons 
 }
 
-document.getElementById("calcularTotal").addEventListener("click", consumidoeneldia)
+
 
 
 
 // Dinamica// 
 
 function mostrarDiferencia() {
-  
   const caloriasObjetivo = Number(localStorage.getItem("caloriasObjetivo"))
-  const totalConsumido =consumidoeneldia()
+  const totalConsumido = consumidoeneldia()
   const diferencia = caloriasObjetivo - totalConsumido
 
   const balanza = document.getElementById("resultadoCalorias")
-  
+
   if (diferencia > 0) {
-    balanza.textContent = `Te quedan ${diferencia} calorías por consumir.`
+    const mensaje = `Te quedan ${diferencia} calorías por consumir.`
+    balanza.textContent = mensaje
+    Swal.fire(`Te quedan ${diferencia} calorías por consumir.`)
+
   } else if (diferencia === 0) {
-    balanza.textContent = "¡Has alcanzado tu objetivo calórico del día! ¡Felicidades! "
-  } else {
-    balanza.textContent = `¡Cuidado! Te pasaste por ${diferencia} calorías.`
-  }
-  
+    const mensaje = "¡Has alcanzado tu objetivo calórico del día! ¡Felicidades!"
+    balanza.textContent = mensaje
+
+    Swal.fire({
+      title: "¡Objetivo alcanzado!",
+      text: mensaje,
+      width: 600,
+      padding: "3em",
+      color: "#716add",
+      background: "#fff url('https://i.pinimg.com/originals/e2/52/83/e2528392cb0e9e2b702e2485ecdd7673.jpg')",
+      backdrop: `
+        rgba(0,0,123,0.4)
+        url("https://media.giphy.com/media/VQGvAbGi4IRaw9sE1U/giphy.gif")
+        left top
+        no-repeat
+      `
+    })
+  } else { const exceso = Math.abs(diferencia)
+    const mensaje = `¡Cuidado! Te pasaste por ${exceso} calorías.`
+    balanza.textContent = mensaje
+    Swal.fire({
+    title: "Cuidado",
+    text: `¡Cuidado! Te pasaste por ${exceso} calorías.`,
+    icon: "warning"
+})
+
+    
+  } 
 }
 
-
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("calcularTotal").addEventListener("click", () => {
+    consumidoeneldia()
+    mostrarDiferencia()
+  })
+})

@@ -33,6 +33,7 @@ Funcionalidades Principales:
 
 *Frameworks utilizados: Bootstrap 
 *Librerias: SweetAlert2
+		Toastify 
 *Lenguajes empleados:
 HTML5 - CSS - JavaScript 
 
