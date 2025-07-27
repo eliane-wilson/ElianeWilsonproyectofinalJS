@@ -1,0 +1,176 @@
+{
+  "2025-07-15": {
+    "desayuno": [
+      { "alimento": "Café con leche", "cantidad": "1 taza", "calorias": 80, "actividad": "" },
+      { "alimento": "Tostadas con mermelada", "cantidad": "2 unidades", "calorias": 120, "actividad": "" }
+    ],
+    "almuerzo": [
+      { "alimento": "Milanesa de pollo", "cantidad": "1 porción", "calorias": 320, "actividad": "" },
+      { "alimento": "Puré de papas", "cantidad": "1 taza", "calorias": 150, "actividad": "" }
+    ],
+    "merienda": [
+      { "alimento": "Yogur con cereales", "cantidad": "1 vaso", "calorias": 160, "actividad": "" }
+    ],
+    "cena": [
+      { "alimento": "Sopa de verduras", "cantidad": "1 plato", "calorias": 100, "actividad": "" },
+      { "alimento": "Pan integral", "cantidad": "1 rodaja", "calorias": 70, "actividad": "" }
+    ]
+  },
+  "2025-07-16": {
+    "desayuno": [
+      { "alimento": "Mate cocido con azúcar", "cantidad": "1 taza", "calorias": 40, "actividad": "" },
+      { "alimento": "Galletitas de agua", "cantidad": "5 unidades", "calorias": 110, "actividad": "" }
+    ],
+    "almuerzo": [
+      { "alimento": "Fideos con salsa", "cantidad": "1 plato", "calorias": 400, "actividad": "" }
+    ],
+    "merienda": [
+      { "alimento": "Infusión sin azúcar", "cantidad": "1 taza", "calorias": 0, "actividad": "" },
+      { "alimento": "Medialuna", "cantidad": "1 unidad", "calorias": 180, "actividad": "" }
+    ],
+    "cena": [
+      { "alimento": "Tortilla de acelga", "cantidad": "1 porción", "calorias": 200, "actividad": "" }
+    ]
+  },
+  "2025-07-17": {
+    "desayuno": [
+      { "alimento": "Té con azúcar", "cantidad": "1 taza", "calorias": 35, "actividad": "" },
+      { "alimento": "Pan con manteca", "cantidad": "2 rodajas", "calorias": 160, "actividad": "" }
+    ],
+    "almuerzo": [
+      { "alimento": "Arroz con atún", "cantidad": "1 plato", "calorias": 450, "actividad": "" }
+    ],
+    "merienda": [
+      { "alimento": "Leche chocolatada", "cantidad": "1 vaso", "calorias": 180, "actividad": "" }
+    ],
+    "cena": [
+      { "alimento": "Ensalada de tomate y huevo", "cantidad": "1 plato", "calorias": 140, "actividad": "" },
+      { "alimento": "Pan", "cantidad": "1 rodaja", "calorias": 70, "actividad": "" }
+    ]
+  },
+  "2025-07-18": {
+    "desayuno": [
+      { "alimento": "Jugo de naranja", "cantidad": "1 vaso", "calorias": 90, "actividad": "" },
+      { "alimento": "Cereal con leche", "cantidad": "1 tazón", "calorias": 210, "actividad": "" }
+    ],
+    "almuerzo": [
+      { "alimento": "Pollo al horno con papas", "cantidad": "1 plato", "calorias": 480, "actividad": "" }
+    ],
+    "merienda": [
+      { "alimento": "Galletitas dulces", "cantidad": "3 unidades", "calorias": 150, "actividad": "" }
+    ],
+    "cena": [
+      { "alimento": "Sándwich de jamón y queso", "cantidad": "1 unidad", "calorias": 320, "actividad": "" }
+    ]
+  },
+  "2025-07-19": {
+    "desayuno": [
+      { "alimento": "Infusión", "cantidad": "1 taza", "calorias": 5, "actividad": "" },
+      { "alimento": "Bizcochuelo casero", "cantidad": "1 porción", "calorias": 230, "actividad": "" }
+    ],
+    "almuerzo": [
+      { "alimento": "Tarta de zapallitos", "cantidad": "1 porción", "calorias": 300, "actividad": "" }
+    ],
+    "merienda": [
+      { "alimento": "Pan con dulce de leche", "cantidad": "2 rodajas", "calorias": 280, "actividad": "" }
+    ],
+    "cena": [
+      { "alimento": "Hamburguesa casera", "cantidad": "1 unidad", "calorias": 400, "actividad": "" },
+      { "alimento": "Ensalada", "cantidad": "1 taza", "calorias": 80, "actividad": "" }
+    ]
+  },
+  "2025-07-20": {
+    "desayuno": [
+      { "alimento": "Té con limón", "cantidad": "1 taza", "calorias": 30, "actividad": "" },
+      { "alimento": "Pan francés", "cantidad": "1 unidad", "calorias": 100, "actividad": "" }
+    ],
+    "almuerzo": [
+      { "alimento": "Pizza casera", "cantidad": "2 porciones", "calorias": 500, "actividad": "" }
+    ],
+    "merienda": [
+      { "alimento": "Leche con cacao", "cantidad": "1 taza", "calorias": 150, "actividad": "" },
+      { "alimento": "Tostadas", "cantidad": "2 unidades", "calorias": 120, "actividad": "" }
+    ],
+    "cena": [
+      { "alimento": "Empanadas de carne", "cantidad": "2 unidades", "calorias": 360, "actividad": "" }
+    ]
+  },
+  "2025-07-21": {
+    "desayuno": [
+      { "alimento": "Café solo", "cantidad": "1 taza", "calorias": 5, "actividad": "" },
+      { "alimento": "Medialuna", "cantidad": "2 unidades", "calorias": 360, "actividad": "" }
+    ],
+    "almuerzo": [
+      { "alimento": "Carne a la plancha", "cantidad": "1 porción", "calorias": 320, "actividad": "" },
+      { "alimento": "Ensalada de hojas verdes", "cantidad": "1 plato", "calorias": 80, "actividad": "" }
+    ],
+    "merienda": [
+      { "alimento": "Yogur descremado", "cantidad": "1 pote", "calorias": 90, "actividad": "" }
+    ],
+    "cena": [
+      { "alimento": "Tortilla de papas", "cantidad": "1 porción", "calorias": 280, "actividad": "" }
+    ]
+  },
+  "2025-07-22": {
+    "desayuno": [
+      { "alimento": "Mate cocido con leche", "cantidad": "1 taza", "calorias": 60, "actividad": "" },
+      { "alimento": "Pan con queso", "cantidad": "1 rodaja", "calorias": 130, "actividad": "" }
+    ],
+    "almuerzo": [
+      { "alimento": "Lentejas guisadas", "cantidad": "1 plato", "calorias": 430, "actividad": "" }
+    ],
+    "merienda": [
+      { "alimento": "Barra de cereal", "cantidad": "1 unidad", "calorias": 120, "actividad": "" }
+    ],
+    "cena": [
+      { "alimento": "Revuelto de verduras", "cantidad": "1 plato", "calorias": 200, "actividad": "" }
+    ]
+  },
+  "2025-07-23": {
+    "desayuno": [
+      { "alimento": "Té", "cantidad": "1 taza", "calorias": 5, "actividad": "" },
+      { "alimento": "Tostadas con queso crema", "cantidad": "2 unidades", "calorias": 150, "actividad": "" }
+    ],
+    "almuerzo": [
+      { "alimento": "Pastel de papas", "cantidad": "1 porción", "calorias": 450, "actividad": "" }
+    ],
+    "merienda": [
+      { "alimento": "Fruta (banana)", "cantidad": "1 unidad", "calorias": 100, "actividad": "" }
+    ],
+    "cena": [
+      { "alimento": "Sopa instantánea", "cantidad": "1 taza", "calorias": 90, "actividad": "" },
+      { "alimento": "Galletas de arroz", "cantidad": "2 unidades", "calorias": 70, "actividad": "" }
+    ]
+  },
+  "2025-07-24": {
+    "desayuno": [
+      { "alimento": "Leche con café", "cantidad": "1 taza", "calorias": 80, "actividad": "" },
+      { "alimento": "Bizcochos dulces", "cantidad": "2 unidades", "calorias": 200, "actividad": "" }
+    ],
+    "almuerzo": [
+      { "alimento": "Ravioles con salsa", "cantidad": "1 plato", "calorias": 500, "actividad": "" }
+    ],
+    "merienda": [
+      { "alimento": "Gelatina", "cantidad": "1 taza", "calorias": 50, "actividad": "" }
+    ],
+    "cena": [
+      { "alimento": "Sándwich vegetal", "cantidad": "1 unidad", "calorias": 250, "actividad": "" }
+    ]
+  },
+  "2025-07-25": {
+    "desayuno": [
+      { "alimento": "Infusión", "cantidad": "1 taza", "calorias": 0, "actividad": "" },
+      { "alimento": "Tostadas integrales", "cantidad": "2 unidades", "calorias": 140, "actividad": "" }
+    ],
+    "almuerzo": [
+      { "alimento": "Polenta con salsa", "cantidad": "1 plato", "calorias": 380, "actividad": "" }
+    ],
+    "merienda": [
+      { "alimento": "Café con leche", "cantidad": "1 taza", "calorias": 80, "actividad": "" },
+      { "alimento": "Budín casero", "cantidad": "1 porción", "calorias": 220, "actividad": "" }
+    ],
+    "cena": [
+      { "alimento": "Tarta de verduras", "cantidad": "1 porción", "calorias": 260, "actividad": "" }
+    ]
+  }
+}

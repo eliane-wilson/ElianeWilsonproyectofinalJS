@@ -1,61 +1,97 @@
 document.addEventListener('DOMContentLoaded', () => {
-  console.log("DOM listo");
+  const hoy = new Date().toLocaleDateString('sv-SE')
+  document.getElementById("fechaSeleccionada").textContent = hoy
 
-  const { Calendar } = window.VanillaCalendarPro;
+  const { Calendar } = window.VanillaCalendarPro
 
   const calendar = new Calendar('#calendar', {
     settings: {
       lang: 'es',
+      firstWeekday: 0,
+      selectedWeekends: [0, 3, 6],
+      dateMin: '2025-06-01',
+      dateMax: '2038-12-31',
       visibility: {
-        calendar: true,
-      },
+        calendar: true
+      }
     },
     actions: {
       clickDay: ({ date }) => {
-        console.log("clickDay activado");
-        const fecha = date;
-        console.log("Fecha seleccionada:", fecha);
-        document.getElementById("fechaSeleccionada").textContent = fecha;
-        mostrarRegistros(fecha);
+        document.getElementById("fechaSeleccionada").textContent = date
+        const hoy = new Date().toLocaleDateString('sv-SE')
+        if (date < hoyISO) {
+          mostrarDesdeHistorico(date)
+        } else {
+          mostrarDesdeLocal(date)
+        }
       }
     }
-  });
+  })
 
-  calendar.init();
-
-  // Mostrar registros de hoy por defecto
-  const hoy = new Date().toISOString().split("T")[0];
-  document.getElementById("fechaSeleccionada").textContent = hoy;
-  mostrarRegistros(hoy);
-});
+  calendar.init()
 
 
-function mostrarRegistros(fecha) {
-  const registros = JSON.parse(localStorage.getItem("registrosComida")) || {};
-  const datos = registros[fecha];
-  const contenedor = document.getElementById("contenidoRegistros");
+  mostrarDesdeLocal(hoy)
+})
 
-  console.log("Registros encontrados para", fecha, datos);
+
+function mostrarDesdeHistorico(fecha) {
+  const URL_JSON = "../../db/historico.json"
+  fetch(URL_JSON)
+    .then(res => res.json())
+    .then(historico => {
+      const data = historico[fecha]
+      renderizarRegistros(fecha, data)
+    })
+    .catch(() => {
+      Swal.fire({
+        icon: "error",
+        title: "No se pudo cargar el historial",
+        text: "Hubo un error al cargar los datos históricos.",
+        confirmButtonColor: "#198754"
+      })
+    })
+}
+
+
+function mostrarDesdeLocal(fecha) {
+  try {
+    const registros = JSON.parse(localStorage.getItem("registrosComida")) || {}
+    const data = registros[fecha]
+    renderizarRegistros(fecha, data)
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error al acceder a tus registros",
+      text: "No pudimos cargar tus registros locales.",
+      confirmButtonColor: "#198754"
+    })
+  }
+}
+
+
+function renderizarRegistros(fecha, datos) {
+  const contenedor = document.getElementById("contenidoRegistros")
 
   if (!datos) {
-    contenedor.innerHTML = `<p>No hay registros para esta fecha.</p>`;
-    return;
+    contenedor.innerHTML = `<p>No hay registros para esta fecha.</p>`
+    return
   }
 
   const generarLista = (titulo, items) => {
-    if (!items || items.length === 0) return `<p>Sin datos de ${titulo.toLowerCase()}.</p>`;
+    if (!items || items.length === 0) return `<p>Sin datos de ${titulo.toLowerCase()}.</p>`
     return `
       <h3>${titulo}</h3>
       <ul>
         ${items.map(item => `<li>${Object.values(item).join(" - ")}</li>`).join("")}
       </ul>
-    `;
-  };
+    `
+  }
 
   contenedor.innerHTML = `
     ${generarLista("Desayuno", datos.desayuno)}
     ${generarLista("Almuerzo", datos.almuerzo)}
-    ${generarLista("Picoteo", datos.picoteo)}
+    ${generarLista("Merienda", datos.merienda || datos.picoteo)}
     ${generarLista("Cena", datos.cena)}
-  `;
+  `
 }
